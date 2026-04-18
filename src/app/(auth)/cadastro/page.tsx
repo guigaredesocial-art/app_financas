@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { TrendingUp, Loader2, CheckCircle } from 'lucide-react'
+import { TrendingUp, Loader2, CheckCircle, Mail, AlertTriangle, Inbox } from 'lucide-react'
 
 export default function CadastroPage() {
   const [email, setEmail] = useState('')
@@ -47,15 +47,62 @@ export default function CadastroPage() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 p-4">
-        <Card className="w-full max-w-md shadow-lg border-0 text-center">
-          <CardContent className="pt-8 pb-8 space-y-4">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-            <h2 className="text-2xl font-bold text-slate-800">Conta criada!</h2>
-            <p className="text-slate-500">
-              Verifique seu e-mail <strong>{email}</strong> para confirmar o cadastro.
-            </p>
-            <Link href="/login">
-              <Button className="mt-4 bg-blue-600 hover:bg-blue-700">Ir para o login</Button>
+        <Card className="w-full max-w-md shadow-lg border-0">
+          <CardContent className="pt-8 pb-8 space-y-5">
+            {/* Ícone de sucesso */}
+            <div className="flex justify-center">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-12 h-12 text-green-500" />
+              </div>
+            </div>
+
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-slate-800">Conta criada com sucesso!</h2>
+              <p className="text-slate-500 mt-2 text-sm">
+                Enviamos um e-mail de confirmação para:
+              </p>
+              <p className="font-semibold text-blue-700 mt-1 break-all">{email}</p>
+            </div>
+
+            {/* Passos para confirmar */}
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 space-y-3">
+              <p className="text-sm font-semibold text-blue-800 flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                Como confirmar o cadastro:
+              </p>
+              <ol className="space-y-2 text-sm text-blue-700">
+                <li className="flex items-start gap-2">
+                  <span className="font-bold flex-shrink-0">1.</span>
+                  Abra sua caixa de entrada do e-mail <strong>{email}</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold flex-shrink-0">2.</span>
+                  Procure um e-mail com o assunto <strong>"Confirme seu cadastro"</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-bold flex-shrink-0">3.</span>
+                  Clique no botão de confirmação dentro do e-mail
+                </li>
+              </ol>
+            </div>
+
+            {/* Aviso de spam */}
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-amber-800">
+                <p className="font-semibold flex items-center gap-1">
+                  <Inbox className="w-4 h-4" /> Não encontrou o e-mail?
+                </p>
+                <p className="mt-1">
+                  Verifique também a pasta de <strong>Spam</strong> ou <strong>Lixo Eletrônico</strong> — às vezes o e-mail de confirmação pode cair por lá.
+                </p>
+              </div>
+            </div>
+
+            <Link href="/login" className="block">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                Já confirmei, ir para o login
+              </Button>
             </Link>
           </CardContent>
         </Card>

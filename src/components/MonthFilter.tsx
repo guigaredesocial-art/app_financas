@@ -26,13 +26,13 @@ export default function MonthFilter({ month, year }: MonthFilterProps) {
   const label = format(new Date(year, month - 1, 1), 'MMMM yyyy', { locale: ptBR })
 
   return (
-    <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2 shadow-sm">
-      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => navigate(-1)}>
-        <ChevronLeft className="w-4 h-4" />
+    <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 shadow-sm">
+      <Button variant="ghost" size="icon" className="h-8 w-8 dark:hover:bg-slate-800" onClick={() => navigate(-1)}>
+        <ChevronLeft className="w-4 h-4 dark:text-slate-300" />
       </Button>
-      <span className="text-sm font-semibold text-slate-700 capitalize w-36 text-center">{label}</span>
-      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => navigate(1)}>
-        <ChevronRight className="w-4 h-4" />
+      <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 capitalize w-36 text-center">{label}</span>
+      <Button variant="ghost" size="icon" className="h-8 w-8 dark:hover:bg-slate-800" onClick={() => navigate(1)}>
+        <ChevronRight className="w-4 h-4 dark:text-slate-300" />
       </Button>
     </div>
   )

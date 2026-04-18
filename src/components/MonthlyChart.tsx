@@ -34,11 +34,11 @@ export default function MonthlyChart({ transactions }: MonthlyChartProps) {
 
   if (data.length === 0) {
     return (
-      <Card className="border-0 shadow-sm bg-white">
+      <Card className="border-0 shadow-sm bg-white dark:bg-slate-900 dark:border dark:border-slate-800">
         <CardHeader>
-          <CardTitle className="text-base font-semibold text-slate-700">Histórico Mensal</CardTitle>
+          <CardTitle className="text-base font-semibold text-slate-700 dark:text-slate-200">Histórico Mensal</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-center h-48 text-slate-400 text-sm">
+        <CardContent className="flex items-center justify-center h-48 text-slate-400 dark:text-slate-500 text-sm">
           Sem dados para exibir
         </CardContent>
       </Card>
@@ -46,14 +46,14 @@ export default function MonthlyChart({ transactions }: MonthlyChartProps) {
   }
 
   return (
-    <Card className="border-0 shadow-sm bg-white">
+    <Card className="border-0 shadow-sm bg-white dark:bg-slate-900 dark:border dark:border-slate-800">
       <CardHeader>
-        <CardTitle className="text-base font-semibold text-slate-700">Histórico Mensal (últimos 6 meses)</CardTitle>
+        <CardTitle className="text-base font-semibold text-slate-700 dark:text-slate-200">Histórico Mensal (últimos 6 meses)</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.3} />
             <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#94a3b8' }} />
             <YAxis
               tick={{ fontSize: 12, fill: '#94a3b8' }}
@@ -61,9 +61,13 @@ export default function MonthlyChart({ transactions }: MonthlyChartProps) {
             />
             <Tooltip
               formatter={(value) => [formatCurrency(Number(value))]}
-              contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              contentStyle={{
+                borderRadius: '8px',
+                border: 'none',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.2)',
+              }}
             />
-            <Legend formatter={(value: string) => <span className="text-sm text-slate-600">{value}</span>} />
+            <Legend formatter={(value: string) => <span className="text-sm text-slate-600 dark:text-slate-300">{value}</span>} />
             <Bar dataKey="Receitas" fill="#22c55e" radius={[4, 4, 0, 0]} />
             <Bar dataKey="Despesas" fill="#ef4444" radius={[4, 4, 0, 0]} />
           </BarChart>

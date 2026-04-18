@@ -101,8 +101,8 @@ export default function TransactionModal({ open, onClose, onSave, transaction }:
               onClick={() => setForm(f => ({ ...f, type: 'receita' }))}
               className={`py-2 rounded-lg text-sm font-medium border-2 transition-colors ${
                 form.type === 'receita'
-                  ? 'border-green-500 bg-green-50 text-green-700'
-                  : 'border-slate-200 text-slate-500 hover:border-slate-300'
+                  ? 'border-green-500 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                  : 'border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-600'
               }`}
             >
               + Receita
@@ -112,8 +112,8 @@ export default function TransactionModal({ open, onClose, onSave, transaction }:
               onClick={() => setForm(f => ({ ...f, type: 'despesa' }))}
               className={`py-2 rounded-lg text-sm font-medium border-2 transition-colors ${
                 form.type === 'despesa'
-                  ? 'border-red-500 bg-red-50 text-red-700'
-                  : 'border-slate-200 text-slate-500 hover:border-slate-300'
+                  ? 'border-red-500 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                  : 'border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-600'
               }`}
             >
               - Despesa

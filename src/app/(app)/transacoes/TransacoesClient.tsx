@@ -44,10 +44,13 @@ export default function TransacoesClient({ initialTransactions }: TransacoesClie
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
   const [deleteId, setDeleteId] = useState<string | null>(null)
 
-  const now = new Date()
-  const years = Array.from(new Set(transactions.map(t => t.date.substring(0, 4))))
-    .sort((a, b) => b.localeCompare(a))
-  if (!years.includes(String(now.getFullYear()))) years.unshift(String(now.getFullYear()))
+  const years = useMemo(() => {
+    const result = Array.from(new Set(transactions.map(t => t.date.substring(0, 4))))
+      .sort((a, b) => b.localeCompare(a))
+    const currentYear = String(new Date().getFullYear())
+    if (!result.includes(currentYear)) result.unshift(currentYear)
+    return result
+  }, [transactions])
 
   const filtered = useMemo(() => {
     return transactions.filter(t => {

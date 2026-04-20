@@ -28,15 +28,17 @@ export default function DeleteConfirmModal({ open, transactionId, onClose, onDel
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="sm:max-w-sm dark:bg-slate-900 dark:border-slate-800">
         <DialogHeader>
-          <DialogTitle>Excluir transação?</DialogTitle>
+          <DialogTitle className="dark:text-slate-100">Excluir transação?</DialogTitle>
         </DialogHeader>
-        <p className="text-sm text-slate-500 mt-2">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
           Esta ação não pode ser desfeita. A transação será removida permanentemente.
         </p>
         <div className="flex gap-3 mt-4">
-          <Button variant="outline" onClick={onClose} className="flex-1">Cancelar</Button>
+          <Button variant="outline" onClick={onClose} className="flex-1 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
+            Cancelar
+          </Button>
           <Button
             variant="destructive"
             onClick={handleDelete}

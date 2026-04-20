@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, startTransition } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Transaction, TransactionFormData, CATEGORIES } from '@/types'
 import { Button } from '@/components/ui/button'
@@ -42,18 +42,20 @@ export default function TransactionModal({ open, onClose, onSave, transaction }:
   const [error, setError] = useState('')
 
   useEffect(() => {
-    if (transaction) {
-      setForm({
-        description: transaction.description,
-        amount: transaction.amount,
-        date: transaction.date,
-        type: transaction.type,
-        category: transaction.category,
-      })
-    } else {
-      setForm(emptyForm)
-    }
-    setError('')
+    startTransition(() => {
+      if (transaction) {
+        setForm({
+          description: transaction.description,
+          amount: transaction.amount,
+          date: transaction.date,
+          type: transaction.type,
+          category: transaction.category,
+        })
+      } else {
+        setForm(emptyForm)
+      }
+      setError('')
+    })
   }, [transaction, open])
 
   async function handleSubmit(e: React.FormEvent) {
@@ -88,9 +90,9 @@ export default function TransactionModal({ open, onClose, onSave, transaction }:
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md dark:bg-slate-900 dark:border-slate-800">
         <DialogHeader>
-          <DialogTitle>{transaction ? 'Editar Transação' : 'Nova Transação'}</DialogTitle>
+          <DialogTitle className="dark:text-slate-100">{transaction ? 'Editar Transação' : 'Nova Transação'}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-2">
@@ -177,7 +179,11 @@ export default function TransactionModal({ open, onClose, onSave, transaction }:
             </Select>
           </div>
 
-          {error && <p className="text-sm text-red-500 bg-red-50 p-3 rounded-lg">{error}</p>}
+          {error && (
+            <p className="text-sm text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-100 dark:border-red-800">
+              {error}
+            </p>
+          )}
 
           <div className="flex gap-3 pt-2">
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">

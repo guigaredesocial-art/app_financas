@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { TrendingUp, Loader2 } from 'lucide-react'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -36,19 +37,24 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-slate-900 p-4 transition-colors">
+      {/* Toggle de tema no canto */}
+      <div className="fixed top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center gap-2 mb-8">
           <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
             <TrendingUp className="w-6 h-6 text-white" />
           </div>
-          <span className="text-2xl font-bold text-slate-800">FinançasPessoais</span>
+          <span className="text-2xl font-bold text-slate-800 dark:text-slate-100">FinançasPessoais</span>
         </div>
 
-        <Card className="shadow-lg border-0">
+        <Card className="shadow-lg border-0 dark:bg-slate-900 dark:border dark:border-slate-800">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl text-center">Entrar</CardTitle>
-            <CardDescription className="text-center">
+            <CardTitle className="text-2xl text-center dark:text-slate-100">Entrar</CardTitle>
+            <CardDescription className="text-center dark:text-slate-400">
               Acesse sua conta para gerenciar suas finanças
             </CardDescription>
           </CardHeader>
@@ -80,7 +86,9 @@ export default function LoginPage() {
               </div>
 
               {error && (
-                <p className="text-sm text-red-500 bg-red-50 p-3 rounded-lg">{error}</p>
+                <p className="text-sm text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-100 dark:border-red-800">
+                  {error}
+                </p>
               )}
 
               <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={loading}>
@@ -88,9 +96,9 @@ export default function LoginPage() {
               </Button>
             </form>
 
-            <div className="mt-6 text-center text-sm text-slate-500">
+            <div className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
               Não tem uma conta?{' '}
-              <Link href="/cadastro" className="text-blue-600 hover:underline font-medium">
+              <Link href="/cadastro" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
                 Criar conta grátis
               </Link>
             </div>
